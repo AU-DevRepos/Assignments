@@ -37,7 +37,7 @@
     <p id="resultado"></p>
 
 
-    <h1>Selecciona tus archivos</h1>
+    <h1>Selecciona tus stickers</h1>
 
     <div class="file-group">
         <label for="file1">Archivos Tipo 1:</label>
@@ -64,6 +64,7 @@
 
 
     <script>
+      alert("Una de estas dos funciones debe ser lo que pide el enunciado")
       function calcularStickers() {
         const sticker1 =
           parseInt(document.getElementById("sticker1").value) || 0;
@@ -86,7 +87,7 @@
       function actualizarContador(inputId, contadorId) {
             const input = document.getElementById(inputId);
             const contador = document.getElementById(contadorId);
-            contador.textContent = `${input.files.length} archivos seleccionados`;
+            contador.textContent = `${input.files.length} stickers seleccionados`;
         }
 
         document.getElementById('file1').addEventListener('change', () => actualizarContador('file1', 'count1'));
@@ -99,7 +100,7 @@
                           document.getElementById('file3').files.length;
 
             const resultado = document.getElementById('resultado');
-            resultado.textContent = `Has cargado un total de ${total} archivos.`;
+            resultado.textContent = `Has cargado un total de ${total} stickers.`;
         }
     </script>
   </body>
