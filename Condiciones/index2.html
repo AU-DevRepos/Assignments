@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selección de Stickers</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .sticker-group {
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Selecciona tus stickers</h1>
+
+    <div class="sticker-group">
+      <label for="sticker1">Cantidad de Stickers Tipo 1:</label>
+      <input type="number" id="sticker1" min="0" value="0" />
+    </div>
+
+    <div class="sticker-group">
+      <label for="sticker2">Cantidad de Stickers Tipo 2:</label>
+      <input type="number" id="sticker2" min="0" value="0" />
+    </div>
+
+    <div class="sticker-group">
+      <label for="sticker3">Cantidad de Stickers Tipo 3:</label>
+      <input type="number" id="sticker3" min="0" value="0" />
+    </div>
+
+    <button onclick="calcularStickers()">Calcular</button>
+
+    <p id="resultado"></p>
+
+
+    <h1>Selecciona tus archivos</h1>
+
+    <div class="file-group">
+        <label for="file1">Archivos Tipo 1:</label>
+        <input type="file" id="file1" multiple>
+        <span id="count1">0 archivos seleccionados</span>
+    </div>
+
+    <div class="file-group">
+        <label for="file2">Archivos Tipo 2:</label>
+        <input type="file" id="file2" multiple>
+        <span id="count2">0 archivos seleccionados</span>
+    </div>
+
+    <div class="file-group">
+        <label for="file3">Archivos Tipo 3:</label>
+        <input type="file" id="file3" multiple>
+        <span id="count3">0 archivos seleccionados</span>
+    </div>
+
+    <button onclick="calcularArchivos()">Calcular</button>
+
+    <p id="resultado"></p>
+
+
+
+    <script>
+      function calcularStickers() {
+        const sticker1 =
+          parseInt(document.getElementById("sticker1").value) || 0;
+        const sticker2 =
+          parseInt(document.getElementById("sticker2").value) || 0;
+        const sticker3 =
+          parseInt(document.getElementById("sticker3").value) || 0;
+
+        const total = sticker1 + sticker2 + sticker3;
+
+        const resultado = document.getElementById("resultado");
+
+        if (total <= 10) {
+          resultado.textContent = `Llevas ${total} stickers`;
+        } else {
+          resultado.textContent = "Llevas demasiados stickers";
+        }
+      }
+
+      function actualizarContador(inputId, contadorId) {
+            const input = document.getElementById(inputId);
+            const contador = document.getElementById(contadorId);
+            contador.textContent = `${input.files.length} archivos seleccionados`;
+        }
+
+        document.getElementById('file1').addEventListener('change', () => actualizarContador('file1', 'count1'));
+        document.getElementById('file2').addEventListener('change', () => actualizarContador('file2', 'count2'));
+        document.getElementById('file3').addEventListener('change', () => actualizarContador('file3', 'count3'));
+
+        function calcularArchivos() {
+            const total = document.getElementById('file1').files.length +
+                          document.getElementById('file2').files.length +
+                          document.getElementById('file3').files.length;
+
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = `Has cargado un total de ${total} archivos.`;
+        }
+    </script>
+  </body>
+</html>
