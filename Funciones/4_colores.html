@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="azul"
+      style="background-color: blue; width: 200px; height: 200px"
+    ></div>
+    <div
+      id="rojo"
+      style="background-color: red; width: 200px; height: 200px"
+    ></div>
+    <div
+      id="verde"
+      style="background-color: green; width: 200px; height: 200px"
+    ></div>
+    <div
+      id="amarillo"
+      style="background-color: yellow; width: 200px; height: 200px"
+    ></div>
+  </body>
+  <script>
+    document.addEventListener("click", (event) => {
+      const objid = event.target.id;
+      if (objid == "azul") {
+        const obj = document.getElementById(objid);
+        obj.style.backgroundColor = "black";
+      }
+      if (objid == "rojo") {
+        const obj = document.getElementById(objid);
+        obj.style.backgroundColor = "black";
+      }
+      if (objid == "verde") {
+        const obj = document.getElementById(objid);
+        obj.style.backgroundColor = "black";
+      }
+      if (objid == "amarillo") {
+        const obj = document.getElementById(objid);
+        obj.style.backgroundColor = "black";
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "a") {
+        /* Cambiar a color 1 */
+      } else if (event.key === "s") {
+        /* Cambiar a color 2 */
+      }
+    });
+  </script>
+</html>

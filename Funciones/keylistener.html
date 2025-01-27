@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div id="a" style="width: 200px; height: 200px; text-align: center">
+      <p>a</p>
+    </div>
+    <div id="s" style="width: 200px; height: 200px; text-align: center">
+      <p>s</p>
+    </div>
+    <div id="d" style="width: 200px; height: 200px; text-align: center">
+      <p>d</p>
+    </div> -->
+  </body>
+  <script>
+    let colorguardado = "";
+    const div = document.createElement("div");
+    document.addEventListener("keydown", function (event) {
+      if (
+        !document.getElementById("key") &&
+        (event.key == "a" || event.key == "s" || event.key == "d")
+      ) {
+        div.id = "key";
+        div.style.height = "200px";
+        div.style.width = "200px";
+        div.style.backgroundColor = "white";
+        div.style.border = "5px solid black";
+        // div.style.borderColor = "black";
+        document.body.appendChild(div);
+      }
+      if (
+        !document.getElementById("key2") &&
+        (event.key == "q" || event.key == "w" || event.key == "e")
+      ) {
+        div.id = "key2";
+        div.style.height = "200px";
+        div.style.width = "200px";
+        div.style.backgroundColor = "white";
+        div.style.border = "5px solid black";
+        // div.style.borderColor = "black";
+        document.body.appendChild(div);
+      }
+      const obj = document.getElementById("key");
+      const obj2 = document.getElementById("key2");
+      if (event.key === "a") {
+        /* Cambiar a color 1 */
+        obj.style.backgroundColor = "pink";
+        colorguardado = "pink";
+      } else if (event.key === "s") {
+        /* Cambiar a color 2 */
+        // const obj = document.getElementById("s");
+        obj.style.backgroundColor = "orange";
+        colorguardado = "orange";
+      } else if (event.key === "d") {
+        // const obj = document.getElementById("d");
+        obj.style.backgroundColor = "skyblue";
+        colorguardado = "skyblue";
+      }
+      if (event.key === "q") {
+        /* Cambiar a color 1 */
+        obj2.style.backgroundColor = "purple";
+        colorguardado = "purple";
+      } else if (event.key === "w") {
+        /* Cambiar a color 2 */
+        // const obj = document.getElementById("s");
+        obj2.style.backgroundColor = "gray";
+        colorguardado = "gray";
+      } else if (event.key === "e") {
+        // const obj = document.getElementById("d");
+        obj2.style.backgroundColor = "brown";
+        colorguardado = "brown";
+      }
+    });
+  </script>
+</html>
