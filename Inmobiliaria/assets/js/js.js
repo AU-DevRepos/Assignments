@@ -225,207 +225,194 @@ const propiedades_venta = [
 let elementoscreado;
 
 document.addEventListener("DOMContentLoaded", function () {
-
-    Cargarpagina();
-
-    
-
+  Cargarpagina();
 });
 
 function Cargarpagina() {
-    if(checkVentaSection()){
-        for (let index = 0; index < propiedades_venta.length; index++) {
-            const element = propiedades_venta[index];
-            const div1 = document.createElement("div");
-            div1.className = "card";
-            const img = document.createElement("img");
-            img.src =
-              "https://fotos.perfil.com/2018/09/21/trim/950/534/nueva-york-09212018-366965.jpg";
-            img.className = "card-img-top";
-            img.alt = "imagen alquiler ${index} ";
-            div1.appendChild(img);
-            const div2 = document.createElement("div");
-            div2.className = "card-body";
-            const h5 = document.createElement("h5");
-            h5.innerHTML = element.nombre;
-            h5.className = "card-title";
-            div2.appendChild(h5);
-            let p = document.createElement("p");
-          
-            p.className = "card-text";
-            p.innerHTML = element.descripcion;
-            div2.appendChild(p);
-            p = document.createElement("p");
-            let i = document.createElement("i");
-            i.className = "fas fa-map-marker-alt";
-            i.innerText = element.ubicacion;
-            p.appendChild(i);
-            div2.appendChild(p);
-          
-            p = document.createElement("p");
-            i = document.createElement("i");
-            i.className = "fas fa-bed";
-            i.innerHTML = element.habitaciones;
-            p.appendChild(i);
-            i = document.createElement("i");
-            i.className = "fas fa-bath";
-            i.innerHTML = element.habitaciones; //enunciado estupido no venian baños en el documento asi que use habitaciones
-            p.appendChild(i);
-            div2.appendChild(p);
-            p = document.createElement("p");
-            i = document.createElement("i");
-            i.className = "fas fa-dollar-sign";
-            i.innerHTML = element.costo;
-            p.appendChild(i);
-            div2.appendChild(p);
-            p = document.createElement("p");
-            i = document.createElement("i");
-          
-            if (element.smoke) {
-              p.className = "text-success";
-              i.className = "fas fa-smoking";
-              i.innerHTML = "Permitido fumar";
-            } else {
-              p.className = "text-danger";
-              i.className = "fas fa-smoking-ban";
-              i.innerHTML = "No se permite fumar";
-            }
-            p.appendChild(i);
-            div2.appendChild(p);
-            p = document.createElement("p");
-            i = document.createElement("i");
-            if (element.pets) {
-              p.className = "text-success";
-              i.className = "fas fa-paw";
-              i.innerHTML = "Mascotas permitidas";
-            } else {
-              p.className = "text-danger";
-              i.className = "fas fa-ban";
-              i.innerHTML = "No se permiten mascotas";
-            }
-            p.appendChild(i);
-            div2.appendChild(p);
-            div1.appendChild(div2);
-          
-            const div0 = document.createElement("div");
-            const div01 = document.createElement("div");
-          
-            //   div0.className = "row";
-            div01.className = "col-md-4 mb-4";
-            div01.appendChild(div1);
-            //   div0.appendChild(div01);
-            if (index == 0) {
-              elementoscreado = div01;
-            }
-          
-            
-            const aux = document.getElementById('listado');
-            aux.appendChild(div01);
-          }
-          
+  if (checkVentaSection()) {
+    for (let index = 0; index < propiedades_venta.length; index++) {
+      const element = propiedades_venta[index];
+      const div1 = document.createElement("div");
+      div1.className = "card";
+      const img = document.createElement("img");
+      img.src =
+        "https://fotos.perfil.com/2018/09/21/trim/950/534/nueva-york-09212018-366965.jpg";
+      img.className = "card-img-top";
+      img.alt = "imagen alquiler ${index} ";
+      div1.appendChild(img);
+      const div2 = document.createElement("div");
+      div2.className = "card-body";
+      const h5 = document.createElement("h5");
+      h5.innerHTML = element.nombre;
+      h5.className = "card-title";
+      div2.appendChild(h5);
+      let p = document.createElement("p");
 
-    }else{
-        for (let index = 0; index < propiedades_alquiler.length; index++) {
-            const element = propiedades_alquiler[index];
-            const div1 = document.createElement("div");
-            div1.className = "card";
-            const img = document.createElement("img");
-            img.src =
-              "https://fotos.perfil.com/2018/09/21/trim/950/534/nueva-york-09212018-366965.jpg";
-            img.className = "card-img-top";
-            img.alt = "imagen alquiler ${index} ";
-            div1.appendChild(img);
-            const div2 = document.createElement("div");
-            div2.className = "card-body";
-            const h5 = document.createElement("h5");
-            h5.innerHTML = element.nombre;
-            h5.className = "card-title";
-            div2.appendChild(h5);
-            let p = document.createElement("p");
-          
-            p.className = "card-text";
-            p.innerHTML = element.descripcion;
-            div2.appendChild(p);
-            p = document.createElement("p");
-            let i = document.createElement("i");
-            i.className = "fas fa-map-marker-alt";
-            i.innerText = element.ubicacion;
-            p.appendChild(i);
-            div2.appendChild(p);
-          
-            p = document.createElement("p");
-            i = document.createElement("i");
-            i.className = "fas fa-bed";
-            i.innerHTML = element.habitaciones;
-            p.appendChild(i);
-            i = document.createElement("i");
-            i.className = "fas fa-bath";
-            i.innerHTML = element.habitaciones; //enunciado estupido no venian baños en el documento asi que use habitaciones
-            p.appendChild(i);
-            div2.appendChild(p);
-            p = document.createElement("p");
-            i = document.createElement("i");
-            i.className = "fas fa-dollar-sign";
-            i.innerHTML = element.costo;
-            p.appendChild(i);
-            div2.appendChild(p);
-            p = document.createElement("p");
-            i = document.createElement("i");
-          
-            if (element.smoke) {
-              p.className = "text-success";
-              i.className = "fas fa-smoking";
-              i.innerHTML = "Permitido fumar";
-            } else {
-              p.className = "text-danger";
-              i.className = "fas fa-smoking-ban";
-              i.innerHTML = "No se permite fumar";
-            }
-            p.appendChild(i);
-            div2.appendChild(p);
-            p = document.createElement("p");
-            i = document.createElement("i");
-            if (element.pets) {
-              p.className = "text-success";
-              i.className = "fas fa-paw";
-              i.innerHTML = "Mascotas permitidas";
-            } else {
-              p.className = "text-danger";
-              i.className = "fas fa-ban";
-              i.innerHTML = "No se permiten mascotas";
-            }
-            p.appendChild(i);
-            div2.appendChild(p);
-            div1.appendChild(div2);
-          
-            const div0 = document.createElement("div");
-            const div01 = document.createElement("div");
-          
-            //   div0.className = "row";
-            div01.className = "col-md-4 mb-4";
-            div01.appendChild(div1);
-            //   div0.appendChild(div01);
-            if (index == 0) {
-              elementoscreado = div01;
-            }
-          
-            
-            const aux = document.getElementById('listado');
-            aux.appendChild(div01);
-          }
-          
+      p.className = "card-text";
+      p.innerHTML = element.descripcion;
+      div2.appendChild(p);
+      p = document.createElement("p");
+      let i = document.createElement("i");
+      i.className = "fas fa-map-marker-alt";
+      i.innerText = element.ubicacion;
+      p.appendChild(i);
+      div2.appendChild(p);
 
+      p = document.createElement("p");
+      i = document.createElement("i");
+      i.className = "fas fa-bed";
+      i.innerHTML = element.habitaciones;
+      p.appendChild(i);
+      i = document.createElement("i");
+      i.className = "fas fa-bath";
+      i.innerHTML = element.habitaciones; //enunciado estupido no venian baños en el documento asi que use habitaciones
+      p.appendChild(i);
+      div2.appendChild(p);
+      p = document.createElement("p");
+      i = document.createElement("i");
+      i.className = "fas fa-dollar-sign";
+      i.innerHTML = element.costo;
+      p.appendChild(i);
+      div2.appendChild(p);
+      p = document.createElement("p");
+      i = document.createElement("i");
+
+      if (element.smoke) {
+        p.className = "text-success";
+        i.className = "fas fa-smoking";
+        i.innerHTML = "Permitido fumar";
+      } else {
+        p.className = "text-danger";
+        i.className = "fas fa-smoking-ban";
+        i.innerHTML = "No se permite fumar";
+      }
+      p.appendChild(i);
+      div2.appendChild(p);
+      p = document.createElement("p");
+      i = document.createElement("i");
+      if (element.pets) {
+        p.className = "text-success";
+        i.className = "fas fa-paw";
+        i.innerHTML = "Mascotas permitidas";
+      } else {
+        p.className = "text-danger";
+        i.className = "fas fa-ban";
+        i.innerHTML = "No se permiten mascotas";
+      }
+      p.appendChild(i);
+      div2.appendChild(p);
+      div1.appendChild(div2);
+
+      const div0 = document.createElement("div");
+      const div01 = document.createElement("div");
+
+      //   div0.className = "row";
+      div01.className = "col-md-4 mb-4";
+      div01.appendChild(div1);
+      //   div0.appendChild(div01);
+      if (index == 0) {
+        elementoscreado = div01;
+      }
+
+      const aux = document.getElementById("listado");
+      aux.appendChild(div01);
     }
+  } else {
+    for (let index = 0; index < propiedades_alquiler.length; index++) {
+      const element = propiedades_alquiler[index];
+      const div1 = document.createElement("div");
+      div1.className = "card";
+      const img = document.createElement("img");
+      img.src =
+        "https://fotos.perfil.com/2018/09/21/trim/950/534/nueva-york-09212018-366965.jpg";
+      img.className = "card-img-top";
+      img.alt = "imagen alquiler ${index} ";
+      div1.appendChild(img);
+      const div2 = document.createElement("div");
+      div2.className = "card-body";
+      const h5 = document.createElement("h5");
+      h5.innerHTML = element.nombre;
+      h5.className = "card-title";
+      div2.appendChild(h5);
+      let p = document.createElement("p");
+
+      p.className = "card-text";
+      p.innerHTML = element.descripcion;
+      div2.appendChild(p);
+      p = document.createElement("p");
+      let i = document.createElement("i");
+      i.className = "fas fa-map-marker-alt";
+      i.innerText = element.ubicacion;
+      p.appendChild(i);
+      div2.appendChild(p);
+
+      p = document.createElement("p");
+      i = document.createElement("i");
+      i.className = "fas fa-bed";
+      i.innerHTML = element.habitaciones;
+      p.appendChild(i);
+      i = document.createElement("i");
+      i.className = "fas fa-bath";
+      i.innerHTML = element.habitaciones; //enunciado estupido no venian baños en el documento asi que use habitaciones
+      p.appendChild(i);
+      div2.appendChild(p);
+      p = document.createElement("p");
+      i = document.createElement("i");
+      i.className = "fas fa-dollar-sign";
+      i.innerHTML = element.costo;
+      p.appendChild(i);
+      div2.appendChild(p);
+      p = document.createElement("p");
+      i = document.createElement("i");
+
+      if (element.smoke) {
+        p.className = "text-success";
+        i.className = "fas fa-smoking";
+        i.innerHTML = "Permitido fumar";
+      } else {
+        p.className = "text-danger";
+        i.className = "fas fa-smoking-ban";
+        i.innerHTML = "No se permite fumar";
+      }
+      p.appendChild(i);
+      div2.appendChild(p);
+      p = document.createElement("p");
+      i = document.createElement("i");
+      if (element.pets) {
+        p.className = "text-success";
+        i.className = "fas fa-paw";
+        i.innerHTML = "Mascotas permitidas";
+      } else {
+        p.className = "text-danger";
+        i.className = "fas fa-ban";
+        i.innerHTML = "No se permiten mascotas";
+      }
+      p.appendChild(i);
+      div2.appendChild(p);
+      div1.appendChild(div2);
+
+      const div0 = document.createElement("div");
+      const div01 = document.createElement("div");
+
+      //   div0.className = "row";
+      div01.className = "col-md-4 mb-4";
+      div01.appendChild(div1);
+      //   div0.appendChild(div01);
+      if (index == 0) {
+        elementoscreado = div01;
+      }
+
+      const aux = document.getElementById("listado");
+      aux.appendChild(div01);
+    }
+  }
 }
 
 function checkVentaSection() {
-    const ventaSection = document.getElementById('venta');
-    if (ventaSection) {
-      return true; 
-    } else {
-      return false;
-    }
+  const ventaSection = document.getElementById("venta");
+  if (ventaSection) {
+    return true;
+  } else {
+    return false;
   }
-  
-  
-  
+}
