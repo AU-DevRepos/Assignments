@@ -8,11 +8,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     />
-    <style>
-      * {
-        background-color: gray;
-      }
-    </style>
   </head>
   <body>
     <div class="card mb-3">
@@ -31,19 +26,15 @@
           class="form-select"
           id="moneda"
           aria-label="Default select example"
+          onchange="loadChart(this.value)"
         >
           <option selected>-</option>
           <option value="uf">uf</option>
-          <option value="ivp">ivp</option>
           <option value="dolar">dolar</option>
           <option value="dolar_intercambio">dolar_intercambio</option>
           <option value="euro">euro</option>
-          <option value="ipc">ipc</option>
           <option value="utm">utm</option>
-          <option value="imacec">imacec</option>
-          <option value="tpm">tpm</option>
           <option value="libra_cobre">libra_cobre</option>
-          <option value="tasa_desempleo">tasa_desempleo</option>
           <option value="bitcoin">bitcoin</option>
         </select>
         <button type="button" class="btn btn-primary" onclick="convertir()">
@@ -55,14 +46,17 @@
         </h3>
       </div>
     </div>
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
       let data;
       CargarMonedas();
       async function CargarMonedas() {
-        const res = await fetch(
-          "https://mindicador.cl/api/" //
-        );
+        const res = await fetch("https://mindicador.cl/api/");
         data = await res.json();
         console.log(data);
       }
@@ -91,6 +85,71 @@
           res.innerHTML = "";
         }
       }
+
+      async function getMonedas(coin = null) {
+        try {
+          let url = "https://mindicador.cl/api";
+          if (coin != null) {
+            url = `https://mindicador.cl/api/${coin}`;
+          }
+          console.log(url);
+          const endpoint = url;
+          const res = await fetch(endpoint);
+          let monedas = await res.json();
+
+          // monedas = monedas.filter((t) => t.Codigo != "UF" && t.Codigo != "UTM");
+          // console.log(monedas);
+          return monedas;
+        } catch (e) {
+          alert(e.message);
+        }
+      }
+
+      function prepararConfiguracionParaLaGrafica(monedas) {
+        // Creamos las variables necesarias para el objeto de configuración
+
+        console.log(Array.isArray(monedas)); // Esto debería devolver true
+        console.log(monedas);
+
+        const tipoDeGrafica = "line";
+        const nombresDeLasMonedas = monedas.map((moneda) => moneda.Codigo);
+        const titulo = "Monedas";
+        const colorDeLinea = "red";
+        const valores = monedas.map((moneda) => {
+          const valor = moneda.Valor.replace(",", ".");
+          return Number(valor);
+        });
+
+        const config = {
+          type: tipoDeGrafica,
+          data: {
+            labels: nombresDeLasMonedas,
+            datasets: [
+              {
+                label: titulo,
+                backgroundColor: colorDeLinea,
+                data: valores,
+              },
+            ],
+          },
+        };
+        return config;
+      }
+
+      async function renderGrafica(coin = null) {
+        const monedas = await getMonedas(coin);
+        const config = prepararConfiguracionParaLaGrafica(monedas);
+        const chartDOM = document.getElementById("myChart");
+
+        new Chart(chartDOM, config);
+      }
+
+      function loadChart(coin) {
+        // console.log(coin);
+
+        renderGrafica(coin);
+      }
+      renderGrafica();
     </script>
   </body>
 </html>
