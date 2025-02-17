@@ -58,7 +58,7 @@
       async function CargarMonedas() {
         const res = await fetch("https://mindicador.cl/api/");
         data = await res.json();
-        console.log(data);
+        // console.log(data);
       }
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -87,69 +87,123 @@
       }
 
       async function getMonedas(coin = null) {
-        try {
-          let url = "https://mindicador.cl/api";
-          if (coin != null) {
-            url = `https://mindicador.cl/api/${coin}`;
+        if (coin != null) {
+          try {
+            const endpoint = `https://mindicador.cl/api/${coin}`;
+            const res = await fetch(endpoint);
+            let monedas = await res.json();
+            // console.log(monedas);
+            return monedas; //.serie;
+          } catch (e) {
+            alert(e.message);
           }
-          console.log(url);
-          const endpoint = url;
-          const res = await fetch(endpoint);
-          let monedas = await res.json();
-
-          // monedas = monedas.filter((t) => t.Codigo != "UF" && t.Codigo != "UTM");
-          // console.log(monedas);
-          return monedas;
-        } catch (e) {
-          alert(e.message);
         }
       }
 
       function prepararConfiguracionParaLaGrafica(monedas) {
-        // Creamos las variables necesarias para el objeto de configuración
+        if (!Array.isArray(monedas.serie)) {
+          console.error("monedas no es un array:", monedas);
+          return;
+        }
 
-        console.log(Array.isArray(monedas)); // Esto debería devolver true
-        console.log(monedas);
+        // console.log(Array.isArray(monedas.serie));
+        // console.log(monedas);
+        // console.log(monedas.serie.sort((a, b) => a.fecha > b.fecha));
 
-        const tipoDeGrafica = "line";
-        const nombresDeLasMonedas = monedas.map((moneda) => moneda.Codigo);
-        const titulo = "Monedas";
-        const colorDeLinea = "red";
-        const valores = monedas.map((moneda) => {
-          const valor = moneda.Valor.replace(",", ".");
-          return Number(valor);
-        });
+        // const formattedData = data.map();
 
+        // let auxdates = monedas.serie.map((item) => ({
+        //   ...item,
+        //   fecha: formatDate(item.fecha),
+        // }));
+        // // console.log(auxdates);
+        // console.log("asdasdasdasdasdasd");
+        // console.log(
+        //   auxdates.sort((a, b) => {
+        //     if (a.fecha < b.fecha) return -1;
+        //     if (a.fecha > b.fecha) return 1;
+        //     return 0;
+        //   })
+        // );
+
+        const fechas = monedas.serie.map((moneda) =>
+          new Date(moneda.fecha).toLocaleDateString("en-GB")
+        );
+        const valores = monedas.serie.map((moneda) => moneda.valor);
+        // fechas.sort((a, b) => {
+        //     if (a.fecha < b.fecha) return -1; // a debe ir antes que b
+        //     if (a.fecha > b.fecha) return 1; // b debe ir antes que a
+        //     return 0; // Son iguales
+        //   })
         const config = {
-          type: tipoDeGrafica,
+          type: "line",
           data: {
-            labels: nombresDeLasMonedas,
+            labels: fechas.slice(0, 10).reverse(),
             datasets: [
               {
-                label: titulo,
-                backgroundColor: colorDeLinea,
+                label: "Valor de la moneda",
+                borderColor: "red",
+                backgroundColor: "rgba(255, 0, 0, 0.2)",
                 data: valores,
+                fill: true,
               },
             ],
           },
+          options: {
+            scales: {
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Fecha",
+                },
+              },
+              y: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Valor",
+                },
+              },
+            },
+          },
         };
+
         return config;
       }
 
       async function renderGrafica(coin = null) {
         const monedas = await getMonedas(coin);
+
+        // Verificamos si hay datos antes de continuar
+        if (!monedas || monedas.length === 0) {
+          console.error("No hay datos para la gráfica.");
+          return;
+        }
+
         const config = prepararConfiguracionParaLaGrafica(monedas);
         const chartDOM = document.getElementById("myChart");
 
-        new Chart(chartDOM, config);
+        if (window.miGrafica) {
+          window.miGrafica.destroy();
+        }
+
+        window.miGrafica = new Chart(chartDOM, config);
       }
 
       function loadChart(coin) {
-        // console.log(coin);
-
         renderGrafica(coin);
       }
-      renderGrafica();
+
+      const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() is zero-based
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      };
+
+      // renderGrafica();
     </script>
   </body>
 </html>
