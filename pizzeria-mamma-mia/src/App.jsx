@@ -8,7 +8,9 @@ function App() {
     <div>
       <Navbar />
       {/* <Home /> */}
-      <RegisterForm/>
+      <div className="container">
+        <RegisterForm/>
+      </div>
       <Footer />
     </div>
   );
