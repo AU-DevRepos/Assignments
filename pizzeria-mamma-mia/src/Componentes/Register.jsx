@@ -33,6 +33,7 @@ const RegisterForm = () => {
     e.preventDefault();
     if (validate()) {      
       console.log(form);
+      alert("formulario correcto")
     }
   };
 
@@ -62,7 +63,7 @@ const RegisterForm = () => {
           name="pass"
           value={form.pass}
           onChange={handleChange}
-          isInvalid={!!errors.password}
+          isInvalid={!!errors.pass}
         />
         <Form.Control.Feedback type="invalid">
           {errors.pass}

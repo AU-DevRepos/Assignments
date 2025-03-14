@@ -2,11 +2,10 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const [form, setForm] = useState({
     user: "",
-    pass: "",
-    confirmPass: "",
+    pass: ""    
   });
   const [errors, setErrors] = useState({});
 
@@ -19,10 +18,12 @@ const RegisterForm = () => {
   const validate = () => {
     let newErrors = {};
 
-    if (!form.user) newErrors.name = "El usuario es obligatorio";
-    if (form.pass.length < 6) newErrors.pass = "Mínimo 6 caracteres";
-    if (form.pass !== form.confirmPass)
-      newErrors.confirmPass = "Las contraseñas no coinciden";
+    if (!form.user) newErrors.user = "No ha ingresado un usuario";
+    if (!form.pass) newErrors.pass = "No ha ingresado una contraseña";
+
+    // if (form.pass.length < 6) newErrors.pass = "Mínimo 6 caracteres";
+    // if (form.pass !== form.confirmPass)
+    //   newErrors.confirmPass = "Las contraseñas no coinciden";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -33,6 +34,7 @@ const RegisterForm = () => {
     e.preventDefault();
     if (validate()) {      
       console.log(form);
+      alert("Usuario enviado a login");
     }
   };
 
@@ -43,11 +45,11 @@ const RegisterForm = () => {
         <Form.Label>Nombre</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Ingrese su nombre"
+          placeholder="Ingrese su usuario"
           name="user"
           value={form.user}
           onChange={handleChange}
-          isInvalid={!!errors.name}
+          isInvalid={!!errors.user}
         />
         <Form.Control.Feedback type="invalid">
           {errors.user}
@@ -62,7 +64,7 @@ const RegisterForm = () => {
           name="pass"
           value={form.pass}
           onChange={handleChange}
-          isInvalid={!!errors.password}
+          isInvalid={!!errors.pass}
         />
         <Form.Control.Feedback type="invalid">
           {errors.pass}
@@ -77,4 +79,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default LoginForm;
