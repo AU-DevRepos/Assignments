@@ -9,12 +9,9 @@ function App() {
     <div>
       <Navbar />
       {/* <Home /> */}
-      <div className="container mt-5 align-self-center">
-        <RegisterForm/>
-      </div>
-      <div className="container m-5">
-        <LoginForm/>
-      </div>
+
+      <RegisterForm />
+      <LoginForm />
       <Footer />
     </div>
   );

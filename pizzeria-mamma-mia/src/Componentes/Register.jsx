@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
 const RegisterForm = () => {
   const [form, setForm] = useState({
@@ -31,65 +34,68 @@ const RegisterForm = () => {
   // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {      
+    if (validate()) {
       console.log(form);
-      alert("formulario correcto")
+      alert("formulario correcto");
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      {/* Usuario */}
-      <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Ingrese su nombre"
-          name="user"
-          value={form.user}
-          onChange={handleChange}
-          isInvalid={!!errors.name}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.user}
-        </Form.Control.Feedback>
-      </Form.Group>
-      {/* Contraseña */}
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Ingrese su contraseña"
-          name="pass"
-          value={form.pass}
-          onChange={handleChange}
-          isInvalid={!!errors.pass}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.pass}
-        </Form.Control.Feedback>
-      </Form.Group>
+      <Container
+        className="col-4 mt-4"
+        
+      >
+        <Form.Group className="mb-3 " controlId="formBasicName">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ingrese su nombre"
+            name="user"
+            value={form.user}
+            onChange={handleChange}
+            isInvalid={!!errors.name}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.user}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      {/* Confirmar Contraseña */}
-      <Form.Group className="mb-3" controlId="formConfirmPassword">
-        <Form.Label>Confirmar Contraseña</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Confirme su contraseña"
-          name="confirmPass"
-          value={form.confirmPass}
-          onChange={handleChange}
-          isInvalid={!!errors.confirmPass}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.confirmPass}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3 " controlId="formBasicPassword">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Ingrese su contraseña"
+            name="pass"
+            value={form.pass}
+            onChange={handleChange}
+            isInvalid={!!errors.pass}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.pass}
+          </Form.Control.Feedback>
+        </Form.Group>
 
+        <Form.Group className="mb-3 " controlId="formConfirmPassword">
+          <Form.Label>Confirmar Contraseña</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirme su contraseña"
+            name="confirmPass"
+            value={form.confirmPass}
+            onChange={handleChange}
+            isInvalid={!!errors.confirmPass}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.confirmPass}
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Registrarse
+        </Button>
+      </Container>
       {/* Botón de envío */}
-      <Button variant="primary" type="submit">
-        Registrarse
-      </Button>
     </Form>
   );
 };
