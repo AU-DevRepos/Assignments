@@ -22,7 +22,7 @@ const RegisterForm = () => {
   const validate = () => {
     let newErrors = {};
 
-    if (!form.user) newErrors.name = "El usuario es obligatorio";
+    if (!form.user) newErrors.user = "El usuario es obligatorio";
     if (form.pass.length < 6) newErrors.pass = "Mínimo 6 caracteres";
     if (form.pass !== form.confirmPass)
       newErrors.confirmPass = "Las contraseñas no coinciden";
@@ -46,7 +46,7 @@ const RegisterForm = () => {
         className="col-4 mt-4"
         
       >
-        <Form.Group className="mb-3 " controlId="formBasicName">
+        <Form.Group className="mb-3 " >
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
@@ -54,14 +54,14 @@ const RegisterForm = () => {
             name="user"
             value={form.user}
             onChange={handleChange}
-            isInvalid={!!errors.name}
+            isInvalid={!!errors.user}
           />
           <Form.Control.Feedback type="invalid">
             {errors.user}
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3 " controlId="formBasicPassword">
+        <Form.Group className="mb-3 " >
           <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -76,7 +76,7 @@ const RegisterForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3 " controlId="formConfirmPassword">
+        <Form.Group className="mb-3 " >
           <Form.Label>Confirmar Contraseña</Form.Label>
           <Form.Control
             type="password"
