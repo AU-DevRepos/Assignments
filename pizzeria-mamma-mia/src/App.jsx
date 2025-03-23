@@ -1,17 +1,23 @@
+import { useState } from "react";
 import Navbar from "./Componentes/Navbar";
-import Home from "./Componentes/Home";
 import Footer from "./Componentes/Footer";
-import RegisterForm from "./Componentes/Register";
-import LoginForm from "./Componentes/Login";
+import Cart from "./Componentes/Cart";
+import { pizzaCart } from "./assets/js/pizzas";
 
 function App() {
+  const [cart, setCart] = useState(pizzaCart);
+
+  const getTotal = () => {
+    return cart.reduce((total, item) => total + item.price * item.count, 0);
+  };
+
   return (
     <div>
-      <Navbar />
+      <Navbar total={getTotal()} />
       {/* <Home /> */}
-
-      <RegisterForm />
-      <LoginForm />
+      <Cart cart={cart} setCart={setCart} />
+      {/* <RegisterForm /> */}
+      {/* <LoginForm /> */}
       <Footer />
     </div>
   );

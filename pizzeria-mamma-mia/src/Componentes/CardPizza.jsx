@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
+
 const CardPizza = ({ name, price, ingredients, img }) => {
   return (
     <Card style={{ width: "18rem" }} className="m-2">

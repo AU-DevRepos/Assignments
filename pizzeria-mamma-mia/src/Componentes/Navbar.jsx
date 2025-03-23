@@ -1,7 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 
-const Navbar = () => {
-  const total = 25000;
+const Navbar = ({ total }) => {
   const token = false;
 
   return (
@@ -9,6 +8,7 @@ const Navbar = () => {
       <Nav.Item>
         <Nav.Link href="/home">🍕 Home</Nav.Link>
       </Nav.Item>
+
       {token ? (
         <>
           <Nav.Item>
@@ -28,6 +28,8 @@ const Navbar = () => {
           </Nav.Item>
         </>
       )}
+
+      
       <Nav.Item className="ms-auto">
         <Nav.Link eventKey="total">🛒 Total: ${total.toLocaleString()}</Nav.Link>
       </Nav.Item>
