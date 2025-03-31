@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 
-const Navbar = ({ total }) => {
+const Navbar = ({ total=2000 }) => {
   const token = false;
 
   return (
