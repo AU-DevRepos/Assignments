@@ -25,7 +25,7 @@ export const CardPizza = () => {
 
   return (
     <>
-      <div>Funciona perro ql</div>
+      {/* <div>Funciona perro ql</div> */}
       <Card key={pizza.id} style={{ width: "20rem", margin: "10px auto" }}>
         <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
         <Card.Body>

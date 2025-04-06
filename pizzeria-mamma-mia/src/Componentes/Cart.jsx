@@ -81,7 +81,7 @@ const Cart = ({ cart, setCart }) => {
         </Card>
       ))}
 
-      
+
       <div className="text-end mt-4">
         <h3>Total: ${getTotal().toLocaleString()} CLP</h3>
         <Button variant="primary" size="lg" className="mt-3">

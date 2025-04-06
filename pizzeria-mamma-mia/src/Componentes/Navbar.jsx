@@ -1,37 +1,70 @@
 import Nav from "react-bootstrap/Nav";
-
-const Navbar = ({ total=2000 }) => {
+import { Link } from "react-router-dom";
+const Navbar = ({ total }) => {
   const token = false;
 
   return (
     <Nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
       <Nav.Item>
-        <Nav.Link href="/home">🍕 Home</Nav.Link>
+        <Link to="/home" className="text-decoration-none ms-3">
+          Home
+        </Link>
+        {/* <Nav.Link href="/home">🍕 Home</Nav.Link> */}
       </Nav.Item>
-
+      <Nav.Item>
+        <Link to="/Profile" className="text-decoration-none ms-3">
+          🔓 Profile
+        </Link>
+        {/* <Nav.Link eventKey="profile">🔓 Profile</Nav.Link> */}
+      </Nav.Item>
+      <Nav.Item>
+        <Link to="/Cart" className="text-decoration-none ms-3">
+          Cart
+        </Link>
+        {/* <Nav.Link eventKey="profile">🔓 Profile</Nav.Link> */}
+      </Nav.Item>
+      <Nav.Item>
+        <Link to="/404”" className="text-decoration-none ms-3">
+          404”
+        </Link>
+        {/* <Nav.Link eventKey="profile">🔓 Profile</Nav.Link> */}
+      </Nav.Item>
       {token ? (
         <>
           <Nav.Item>
-            <Nav.Link eventKey="profile">🔓 Profile</Nav.Link>
+            <Link to="/Profile" className="text-decoration-none ms-3">
+              🔓 Profile
+            </Link>
+            {/* <Nav.Link eventKey="profile">🔓 Profile</Nav.Link> */}
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="logout">🔒 Logout</Nav.Link>
+            <Link to="/Logout" className="text-decoration-none ms-3">
+              🔒 Logout
+            </Link>
+            {/* <Nav.Link eventKey="logout">🔒 Logout</Nav.Link> */}
           </Nav.Item>
         </>
       ) : (
         <>
           <Nav.Item>
-            <Nav.Link eventKey="login">🔐 Login</Nav.Link>
+            <Link to="/Login" className="text-decoration-none ms-3">
+              🔒 login
+            </Link>
+            {/* <Nav.Link eventKey="login">🔐 Login</Nav.Link> */}
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="register">🔐 Register</Nav.Link>
+            <Link to="/Register" className="text-decoration-none ms-3">
+              🔐 Register
+            </Link>
+            {/* <Nav.Link eventKey="register">🔐 Register</Nav.Link> */}
           </Nav.Item>
         </>
       )}
 
-      
       <Nav.Item className="ms-auto">
-        <Nav.Link eventKey="total">🛒 Total: ${total.toLocaleString()}</Nav.Link>
+        <Nav.Link as={Link} to="/cart" eventKey="total">
+          <button>🛒 Total: ${total.toLocaleString()}</button>
+        </Nav.Link>
       </Nav.Item>
     </Nav>
   );
