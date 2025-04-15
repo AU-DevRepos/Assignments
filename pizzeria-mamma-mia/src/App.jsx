@@ -11,6 +11,8 @@ import LoginForm from "./Componentes/Login";
 import Cart from "./Componentes/Cart";
 import NotFound from "./Componentes/NotFound";
 import { Profile } from "./Componentes/Profile";
+import Dashboard from "./Componentes/Dashboard";
+import MyContext from "./context/TestContext";
 
 function App() {
   const [cart, setCart] = useState(pizzaCart);
@@ -19,6 +21,14 @@ function App() {
     return cart.reduce((total, item) => total + item.price * item.count, 0);
   };
 
+  const [count, setCount] = useState(0)
+  const incrementar = () => setCount(count + 1)
+  const disminuir = () => setCount(count - 1)
+  const stateGlobal = {
+    incrementar,
+    disminuir,
+    total:count
+  }
   return (
     <div>
       <BrowserRouter>
@@ -30,11 +40,13 @@ function App() {
           <Route path="/CardPizza" element={<CardPizza />} />
           <Route path="/Cart" element={<Cart cart={cart} setCart={setCart} />} />
           <Route path="/Profile" element={<Profile />} />
-
           <Route path="*" element={<NotFound />} />
-          {/* <Route path="/Home" element={<Home />} /> */}
+          
         </Routes>
       </BrowserRouter>
+
+
+      {/* <Cart cart={cart} setCart={setCart} /> */}
       {/* <pizzaCart />
       <RegisterForm />
       <CardPizza />
@@ -43,6 +55,9 @@ function App() {
       <RegisterForm />
       <LoginForm />
       <Myapp /> */}
+      {/* <MyContext.Provider value={stateGlobal}>
+        <Dashboard />
+      </MyContext.Provider> */}
       <Footer />
     </div>
   );

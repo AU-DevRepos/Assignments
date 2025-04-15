@@ -1,41 +1,8 @@
-import { pizzaCart } from "../assets/js/pizzas";
-import { useState } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { useCart } from "../context/CartContext";
 
-const Cart = ({ cart, setCart }) => {
-  //   const [cart, setCart] = useState(pizzaCart);{ cart, setCart }
-
-  const increaseQuantity = (id) => {
-    const updatedCart = cart.map((item) =>
-      item.id === id ? { ...item, count: item.count + 1 } : item
-    );
-    setCart(updatedCart);
-  };
-
-  const decreaseQuantity = (id) => {
-    const updatedCart = cart.reduce((acc, item) => {
-      if (item.id === id) {
-        if (item.count > 1) {
-          acc.push({ ...item, count: item.count - 1 });
-        } else if (item.count === 1) {
-          if (confirm(`¿Seguro deseas eliminar ${item.name} del carrito?`)) {
-            return acc;
-          } else {
-            acc.push(item);
-          }
-        }
-      } else {
-        acc.push(item);
-      }
-      return acc;
-    }, []);
-
-    setCart(updatedCart);
-  };
-
-  const getTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.count, 0);
-  };
+const Cart = () => {
+  const { cart, increaseQuantity, decreaseQuantity, getTotal } = useCart();
 
   return (
     <Container>
@@ -48,14 +15,27 @@ const Cart = ({ cart, setCart }) => {
               <Card.Img
                 src={pizza.img}
                 alt={pizza.name}
-                className="img-fluid rounded-start"
+                className="img-fluid rounded-start m-2"
               />
             </Col>
 
             <Col md={6}>
               <Card.Body>
                 <Card.Title>{pizza.name}</Card.Title>
-                <Card.Text>${pizza.price.toLocaleString()} CLP</Card.Text>
+                <Row>
+                  <Col>
+                    <Card.Text>{pizza.desc}</Card.Text>
+                    <Card.Text>${pizza.price.toLocaleString()} CLP</Card.Text>
+                  </Col>
+                  <Col>
+                    <Card.Title>Ingredientes:</Card.Title>
+                    <ul>
+                      {pizza.ingredients.map((ing, index) => (
+                        <li key={index}>{ing}</li>
+                      ))}
+                    </ul>
+                  </Col>
+                </Row>
               </Card.Body>
             </Col>
 
@@ -80,7 +60,6 @@ const Cart = ({ cart, setCart }) => {
           </Row>
         </Card>
       ))}
-
 
       <div className="text-end mt-4">
         <h3>Total: ${getTotal().toLocaleString()} CLP</h3>

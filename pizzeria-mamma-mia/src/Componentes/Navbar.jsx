@@ -1,8 +1,9 @@
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-const Navbar = ({ total }) => {
+import { useCart } from "../context/CartContext";
+const Navbar = () => {
   const token = false;
-
+  const { getTotal } = useCart();
   return (
     <Nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
       <Nav.Item>
@@ -63,7 +64,7 @@ const Navbar = ({ total }) => {
 
       <Nav.Item className="ms-auto">
         <Nav.Link as={Link} to="/cart" eventKey="total">
-          <button>🛒 Total: ${total.toLocaleString()}</button>
+          <button>🛒 Total: ${getTotal().toLocaleString()}</button>
         </Nav.Link>
       </Nav.Item>
     </Nav>
