@@ -27,13 +27,14 @@ function App() {
   const stateGlobal = {
     incrementar,
     disminuir,
-    total:count
+    total: count
   }
   return (
     <div>
       <BrowserRouter>
         <Navbar total={getTotal()} />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Register" element={<RegisterForm />} />
           <Route path="/Login" element={<LoginForm />} />
@@ -41,23 +42,9 @@ function App() {
           <Route path="/Cart" element={<Cart cart={cart} setCart={setCart} />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
-          
+
         </Routes>
       </BrowserRouter>
-
-
-      {/* <Cart cart={cart} setCart={setCart} /> */}
-      {/* <pizzaCart />
-      <RegisterForm />
-      <CardPizza />
-      <Home />
-      <Cart cart={cart} setCart={setCart} />
-      <RegisterForm />
-      <LoginForm />
-      <Myapp /> */}
-      {/* <MyContext.Provider value={stateGlobal}>
-        <Dashboard />
-      </MyContext.Provider> */}
       <Footer />
     </div>
   );

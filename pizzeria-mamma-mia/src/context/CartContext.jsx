@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
                 const data = await res.json();
                 const pizzasConCantidad = data.map((pizza) => ({
                     ...pizza,
-                    count: 1,
+                    count: 0,
                 }));
                 setCart(pizzasConCantidad);
             } catch (error) {
