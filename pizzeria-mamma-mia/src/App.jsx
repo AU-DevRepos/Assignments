@@ -13,6 +13,9 @@ import NotFound from "./Componentes/NotFound";
 import { Profile } from "./Componentes/Profile";
 import Dashboard from "./Componentes/Dashboard";
 import MyContext from "./context/TestContext";
+import Logout from "./Componentes/Logout";
+import Pizza from "./Componentes/Pizza";
+
 
 function App() {
   const [cart, setCart] = useState(pizzaCart);
@@ -41,8 +44,10 @@ function App() {
           <Route path="/CardPizza" element={<CardPizza />} />
           <Route path="/Cart" element={<Cart cart={cart} setCart={setCart} />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/Logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
-
+          <Route path="/pizza/:id" element={<Pizza />} />
+          
         </Routes>
       </BrowserRouter>
       <Footer />

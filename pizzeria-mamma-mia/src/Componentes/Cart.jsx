@@ -1,10 +1,12 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
-
+import { useSession } from "../context/SessionContext";
 const Cart = () => {
   const { cart, increaseQuantity, decreaseQuantity, getTotal } = useCart();
+  const { session } = useSession();
+  const token = session?.Token || false;
 
-  return (
+  return (  
     <Container>
       <h1 className="my-4 text-center">🛒 Carrito de Compras</h1>
 
@@ -63,7 +65,8 @@ const Cart = () => {
 
       <div className="text-end mt-4">
         <h3>Total: ${getTotal().toLocaleString()} CLP</h3>
-        <Button variant="primary" size="lg" className="mt-3">
+        
+        <Button variant="primary" size="lg" className="mt-3" disabled={!token}>
           Finalizar Compra 🛍️
         </Button>
       </div>

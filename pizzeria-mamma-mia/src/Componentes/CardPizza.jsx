@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
-
+import { Link } from "react-router-dom";
 
 export const CardPizza = () => {
   // const [Pizzas, setPizzas] = useState([]);
@@ -28,18 +28,22 @@ export const CardPizza = () => {
         {cart.map((pizza) => (
           <Col key={pizza.id} md={4} sm={6}>
             <Card className="h-100 shadow-sm">
-              <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
+              <Link to={`/pizza/${pizza.id}`}>
+                <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
+              </Link>
+
               <Card.Body>
                 <Card.Title>{pizza.name}</Card.Title>
                 <Card.Text>{pizza.desc}</Card.Text>
                 <Card.Text>
                   <strong>Ingredientes:</strong>
-                  <ul className="mb-0">
-                    {pizza.ingredients?.map((ing, idx) => (
-                      <li key={idx}>{ing}</li>
-                    ))}
-                  </ul>
                 </Card.Text>
+                <ul className="mb-0">
+                  {pizza.ingredients?.map((ing, idx) => (
+                    <li key={idx}>{ing}</li>
+                  ))}
+                </ul>
+
                 <Card.Text>
                   <strong>Precio:</strong> ${pizza.price.toLocaleString()} CLP
                 </Card.Text>

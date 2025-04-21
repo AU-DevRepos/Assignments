@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { CardPizza } from "./CardPizza";
+import  {CardPizza}  from "./CardPizza";
 import { Container } from "react-bootstrap";
 
 const Home = () => {

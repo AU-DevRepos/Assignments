@@ -4,12 +4,20 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { useSession } from "../context/SessionContext";
+
+
 
 const RegisterForm = () => {
+
+
+  const { login } = useSession();
+  
   const [form, setForm] = useState({
     user: "",
     pass: "",
     confirmPass: "",
+    token:true
   });
   const [errors, setErrors] = useState({});
 
@@ -32,19 +40,30 @@ const RegisterForm = () => {
   };
 
   // Manejar el envío del formulario
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validate()) {
+  //     register(form); 
+  //     console.log("Registro:", form);      
+  //   }
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log(form);
-      alert("formulario correcto");
+    if (validate()) {      
+      const newUser = {
+        user: form.user,
+        pass: form.pass,
+        Token: true
+      };  
+      login(newUser);
+      console.log("Registro:", newUser);      
     }
   };
-
   return (
     <Form onSubmit={handleSubmit}>
       <Container
         className="col-4 mt-4"
-        
+
       >
         <Form.Group className="mb-3 " >
           <Form.Label>Nombre</Form.Label>
