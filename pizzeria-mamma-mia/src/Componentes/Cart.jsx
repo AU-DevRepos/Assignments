@@ -3,8 +3,8 @@ import { useCart } from "../context/CartContext";
 import { useSession } from "../context/SessionContext";
 const Cart = () => {
   const { cart, increaseQuantity, decreaseQuantity, getTotal } = useCart();
-  const { session } = useSession();
-  const token = session?.Token || false;
+  const { email } = useSession();
+  const token = email?.email || false;
 
   return (  
     <Container>
@@ -66,7 +66,7 @@ const Cart = () => {
       <div className="text-end mt-4">
         <h3>Total: ${getTotal().toLocaleString()} CLP</h3>
         
-        <Button variant="primary" size="lg" className="mt-3" disabled={!token}>
+        <Button variant="primary" size="lg" className="mt-3" disabled={!email}>
           Finalizar Compra 🛍️
         </Button>
       </div>
