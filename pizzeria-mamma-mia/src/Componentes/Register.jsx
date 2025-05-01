@@ -5,31 +5,24 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { useSession } from "../context/SessionContext";
-
-
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const { register } = useSession();
+  const navigate = useNavigate();
 
-
-  const { login } = useSession();
-  
   const [form, setForm] = useState({
     user: "",
     pass: "",
     confirmPass: "",
-    token:true
   });
   const [errors, setErrors] = useState({});
-
-  // Manejar cambios en los inputs
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Validar el formulario
   const validate = () => {
     let newErrors = {};
-
     if (!form.user) newErrors.user = "El usuario es obligatorio";
     if (form.pass.length < 6) newErrors.pass = "Mínimo 6 caracteres";
     if (form.pass !== form.confirmPass)
@@ -39,33 +32,24 @@ const RegisterForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Manejar el envío del formulario
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validate()) {
-  //     register(form); 
-  //     console.log("Registro:", form);      
-  //   }
-  // };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {      
-      const newUser = {
-        user: form.user,
-        pass: form.pass,
-        Token: true
-      };  
-      login(newUser);
-      console.log("Registro:", newUser);      
+
+    if (validate()) {
+      const success = await register(form.user, form.pass);
+      if (success) {
+        console.log("Registro exitoso");
+        navigate("/profile");
+      } else {
+        console.log("Error al registrar");
+      }
     }
   };
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Container
-        className="col-4 mt-4"
-
-      >
-        <Form.Group className="mb-3 " >
+      <Container className="col-4 mt-4">
+        <Form.Group className="mb-3">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
@@ -80,7 +64,7 @@ const RegisterForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3 " >
+        <Form.Group className="mb-3">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -95,7 +79,7 @@ const RegisterForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3 " >
+        <Form.Group className="mb-3">
           <Form.Label>Confirmar Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -114,7 +98,6 @@ const RegisterForm = () => {
           Registrarse
         </Button>
       </Container>
-      {/* Botón de envío */}
     </Form>
   );
 };

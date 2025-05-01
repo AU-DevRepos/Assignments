@@ -1,11 +1,17 @@
 import Nav from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useSession } from "../context/SessionContext";
 
 const Navbar = () => {
-  const { session } = useSession();
+  const { email, logout } = useSession();
   const { getTotal } = useCart();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <Nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -29,31 +35,15 @@ const Navbar = () => {
       </Nav.Item>
 
       {/* Links según sesión */}
-      {session?.Token ? (
+      {email ? (
         <>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/profile" className="ms-3">
-              🔓 Profile
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/logout" className="ms-3">
-              🔒 Logout
-            </Nav.Link>
-          </Nav.Item>
+          <Nav.Link as={Link} to="/profile">👤 {email}</Nav.Link>
+          <Nav.Link as="button" onClick={logout}>🔒 Cerrar sesión</Nav.Link>
         </>
       ) : (
         <>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/login" className="ms-3">
-              🔐 Login
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/register" className="ms-3">
-              📝 Register
-            </Nav.Link>
-          </Nav.Item>
+          <Nav.Link as={Link} to="/login">🔐 Login</Nav.Link>
+          <Nav.Link as={Link} to="/register">📝 Register</Nav.Link>
         </>
       )}
 

@@ -1,20 +1,18 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
-const SessionContext = createContext();
+export const UserContext = createContext();
 
-export const useSession = () => useContext(SessionContext);
-
-export const SessionProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
   const [email, setEmail] = useState(null);
   const [token, setToken] = useState(null);
-  
-// Cargar datos guardados al recargar página
+
+  // Cargar datos guardados al recargar página
   useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
     const storedToken = localStorage.getItem("token");
-    if (storedEmail && storedToken) {
-      setEmail(storedEmail);
+    const storedEmail = localStorage.getItem("email");
+    if (storedToken && storedEmail) {
       setToken(storedToken);
+      setEmail(storedEmail);
     }
   }, []);
 
@@ -27,21 +25,16 @@ export const SessionProvider = ({ children }) => {
       });
 
       const data = await res.json();
-
       if (res.ok) {
-        setEmail(data.email);
         setToken(data.token);
-        localStorage.setItem("email", data.email);
+        setEmail(data.email);
         localStorage.setItem("token", data.token);
-        console.log("Session iniciada");
-        return true;
+        localStorage.setItem("email", data.email);
       } else {
         alert(data.message || "Error al iniciar sesión");
-        return false;
       }
     } catch (err) {
       console.error("Login error:", err);
-      return false;
     }
   };
 
@@ -54,28 +47,24 @@ export const SessionProvider = ({ children }) => {
       });
 
       const data = await res.json();
-
       if (res.ok) {
-        setEmail(data.email);
         setToken(data.token);
-        localStorage.setItem("email", data.email);
+        setEmail(data.email);
         localStorage.setItem("token", data.token);
-        return true;
+        localStorage.setItem("email", data.email);
       } else {
         alert(data.message || "Error al registrar");
-        return false;
       }
     } catch (err) {
       console.error("Register error:", err);
-      return false;
     }
   };
 
   const logout = () => {
-    setEmail(null);
     setToken(null);
-    localStorage.removeItem("email");
+    setEmail(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
   };
 
   const getProfile = async () => {
@@ -86,11 +75,9 @@ export const SessionProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const data = await res.json();
-
       if (res.ok) {
-        setEmail(data.email); // solo si quieres actualizar
+        setEmail(data.email);
       } else {
         alert("No se pudo obtener el perfil");
       }
@@ -100,10 +87,8 @@ export const SessionProvider = ({ children }) => {
   };
 
   return (
-    <SessionContext.Provider
-      value={{ email, token, login, register, logout, getProfile }}
-    >
+    <UserContext.Provider value={{ email, token, login, register, logout, getProfile }}>
       {children}
-    </SessionContext.Provider>
+    </UserContext.Provider>
   );
 };

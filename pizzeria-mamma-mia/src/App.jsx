@@ -10,7 +10,7 @@ import RegisterForm from "./Componentes/Register";
 import LoginForm from "./Componentes/Login";
 import Cart from "./Componentes/Cart";
 import NotFound from "./Componentes/NotFound";
-import { Profile } from "./Componentes/Profile";
+import Profile  from "./Componentes/Profile";
 import Dashboard from "./Componentes/Dashboard";
 import MyContext from "./context/TestContext";
 import Logout from "./Componentes/Logout";
